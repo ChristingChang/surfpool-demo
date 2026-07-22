@@ -220,7 +220,7 @@ export default function Home() {
     note: "",
   });
   const [requestForm, setRequestForm] = useState({
-    date: "2026-06-13",
+    date: TODAY,
     destination: "烏石港（北堤）",
     departureArea: "永和",
     routeFlexibility: "可配合司機",
