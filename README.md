@@ -28,7 +28,7 @@
 - **後端**:Supabase(Postgres + Auth + Row Level Security),無自建 server
 - **部署**:Vercel + GitHub 自動部署
 
-## 開發故事
+## debug紀錄
 
 前端原型完成後,最花時間的其實是接上真實登入與資料庫的那段路——一個看似單純的「Google 登入失敗」,一路查出六層疊在一起的問題:環境變數裡一個多餘的路徑、一個指到不存在資料表的資料庫 trigger、一條漏掉的 RLS 政策、部署網域沒同步、還有一個藏在表單預設值裡寫死的過期日期。每一層都用瀏覽器 DevTools 或 Postgres Logs 抓到第一手證據才動手修,而不是看到錯誤訊息就照字面意思猜。
 
@@ -36,7 +36,7 @@
 
 ## 我如何跟 AI 協作
 
-這個專案的除錯與部署過程,我用 Claude Code 當搭檔一起做,但分工很明確:排查方向、下判斷、動手查資料庫跟跑指令的都是我自己——例如去 Supabase Dashboard 查 `pg_trigger`、翻 Postgres Logs 找原始錯誤、在瀏覽器 DevTools 裡對照 Request/Response 驗證是 RLS 問題還是身份問題,以及最後決定「拿掉壞掉的 trigger 而不是修它」這類設計取捨,都是我自己確認過根因之後做的決定。AI 的角色是幫我更快讀懂錯誤訊息背後代表什麼、提出可能的排查方向,並在我確認方向後動手改程式碼或給出對應的 SQL。整個過程比較像找了一個經驗豐富的 pair,而不是把問題丟出去等答案。
+這個專案裡,我扮演的角色是釐清需求、掌握整個系統怎麼運作,並把 Claude Code 和 Claude Chrome 當成分工不同的協作者一起把它做出來:Claude Code 負責分析問題、提出方向,目前已完成登入問題除錯、git 版控,以及 Vercel、Google Console 的部署設定) 目前兩帳號互測smoke test正在準備進行中(2026/07/23)
 
 ## 開始使用
 
